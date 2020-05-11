@@ -1,13 +1,243 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+#title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 80px;
+  height: 40px;
+  align-items: center;
+  background-color: #339102;
+  color: white;
+}
+#title a {
+  color: white;
+  margin: 0px 15px;
+  padding: 14px;
+  text-decoration: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#userDetails {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+}
+
+.formSection1,
+.formSection2,
+.formSection3 {
+  width: 33.33%;
+  padding: 0 50px;
+}
+
+/* FormSection1 */
+
+.profileSection {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0px;
+  padding: 0 25px;
+}
+.photo {
+  height: 130px;
+  width: 130px;
+  background-size: contain;
+  border-radius: 70px;
+  border-style: solid;
+  border-width: thin;
+}
+#upload {
+  margin: auto 0;
+  border-color: #1ae8d3;
+  background: white;
+  color: #1ae8d3;
+  outline: none;
+  border-style: solid;
+  border-width: initial;
+  border-radius: 9px;
+  height: 42px;
+  width: 85px;
+  cursor: pointer;
+}
+#date {
+  width: 98%;
+  border-radius: 5px;
+  height: 30px;
+  outline: none;
+  border-style: ridge;
+}
+
+.error {
+  color: red;
+  height: 20px;
+}
+
+#selectCountry {
+  width: 100%;
+  height: 32px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* .formSection2 */
+
+.organisation {
+  margin: 9px 0px;
+}
+#selectOrganisation {
+  width: 100%;
+  height: 32px;
+  border-radius: 5px;
+  background-color: white;
+  border-style: ridge;
+}
+
+#firstNameField {
+  width: 99%;
+  height: 26px;
+  border-radius: 5px;
+  border-style: ridge;
+}
+.mobileNumber {
+  margin: 0px 0px;
+}
+#mobileField,
+#lastNameField,
+#emailIdField,
+#cityInput {
+  width: 99%;
+  border-radius: 5px;
+  height: 26px;
+  outline: none;
+  border-style: ridge;
+}
+#selectState {
+  width: 100%;
+  height: 32px;
+  border-radius: 5px;
+  background-color: white;
+  border-style: ridge;
+}
+
+/* .formSection3 */
+
+.lastName {
+  margin: 10px 0px;
+}
+.gender {
+  margin: 10px 0px;
+}
+.emailID {
+  margin: 5px 0px;
+}
+#genderCheck {
+  display: flex;
+  margin: 0px;
+}
+
+/* AddressSection */
+
+#address {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 35px;
+}
+.addressOfStay,
+.presentAddress {
+  margin: 0 15px;
+}
+textarea {
+  resize: none;
+}
+
+/* confirmation section */
+
+#confirmSection {
+  padding: 0 48px;
+}
+
+.checkBox {
+  margin: 10px 0px;
+  display: flex;
+}
+#pincode {
+  margin-top: 8px;
+}
+#pincodeField {
+  width: 360px;
+  border-radius: 5px;
+  height: 30px;
+  outline: none;
+  border-style: ridge;
+}
+#submitSection {
+  display: flex;
+  justify-content: flex-end;
+}
+#update {
+  display: none;
+}
+#update,
+#register {
+  outline: none;
+  height: 40px;
+  width: 100px;
+  background-color: #00c61b;
+  color: white;
+  border: none;
+  margin: 0px 15px;
+  cursor: pointer;
+}
+#cancel {
+  outline: none;
+  height: 40px;
+  width: 100px;
+  background-color: #00c61b;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Table  */
+#salesOrderTable{
+  text-align: center;
+}
+table{
+  width: 94%;
+  margin:50px 50px;
+}
+table th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 8px 0px;
+  color: black;
+  background-color: #00c61b;
+}
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 8px 0px;
+  color: black;
+  background-color: #eeeeee;
 }
