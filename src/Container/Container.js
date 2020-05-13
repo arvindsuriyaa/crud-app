@@ -170,71 +170,69 @@ class Container extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <div id="title">
-            <span>Employee Details</span>
-            <div className="link">
-              <NavLink
-                activeStyle={{
-                  color: "black",
-                  backgroundColor: "white",
-                }}
-                to="/Table"
-              >
-                Table
-              </NavLink>
-              <NavLink
-                activeStyle={{
-                  color: "black",
-                  backgroundColor: "white",
-                }}
-                to="/Form"
-              >
-                Form
-              </NavLink>
-            </div>
+        <div id="title">
+          <span>Employee Details</span>
+          <div className="link">
+            <NavLink
+              activeStyle={{
+                color: "black",
+                backgroundColor: "white",
+              }}
+              to="/Table"
+            >
+              Table
+            </NavLink>
+            <NavLink
+              activeStyle={{
+                color: "black",
+                backgroundColor: "white",
+              }}
+              to="/Form"
+            >
+              Form
+            </NavLink>
           </div>
-          <div className="App-intro">
-            <Switch>
-              <Route exact path="/Table" />
-              <Route path="/Form" />
-              <Redirect to="/Table" />
-            </Switch>
-          </div>
-          <Route
-            path="/Form"
-            exact
-            strict
-            render={() => {
-              return (
-                <EmployeeForm
-                  userDetails={this.state.userDetails}
-                  updateUserInfo={this.collectInfo}
-                  errors={this.state.errors}
-                  submitHandler={this.submitHandler}
-                  state={this.state}
-                  toggleChange={this.toggleChange}
-                  cancel={this.cancel}
-                />
-              );
-            }}
-          />
-          <Route
-            path="/Table"
-            exact
-            strict
-            render={() => {
-              return (
-                <Table
-                  state={this.state}
-                  userData={this.state.user}
-                  removeData={this.removeData}
-                  editData={this.editData}
-                />
-              );
-            }}
-          />
         </div>
+        <div className="App-intro">
+          <Switch>
+            <Route exact path="/Table" />
+            <Route path="/Form" />
+            <Redirect to="/Table" />
+          </Switch>
+        </div>
+        <Route
+          path="/Form"
+          exact
+          strict
+          render={() => {
+            return (
+              <EmployeeForm
+                userDetails={this.state.userDetails}
+                updateUserInfo={this.collectInfo}
+                errors={this.state.errors}
+                submitHandler={this.submitHandler}
+                state={this.state}
+                toggleChange={this.toggleChange}
+                cancel={this.cancel}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/Table"
+          exact
+          strict
+          render={() => {
+            return (
+              <Table
+                state={this.state}
+                userData={this.state.user}
+                removeData={this.removeData}
+                editData={this.editData}
+              />
+            );
+          }}
+        />
       </Router>
     );
   }
