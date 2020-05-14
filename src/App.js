@@ -1,11 +1,11 @@
 import React from "react";
-import Container from'./Container/Container'
+import Root from'./Root'
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Container/>
+      <Root/>
     </div>
   );
 }
