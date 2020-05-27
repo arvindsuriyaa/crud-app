@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Country } from "../Constants/Constant";
+
 function UserInfo(props) {
   return (
     <div className="formSection1">
@@ -13,22 +15,22 @@ function UserInfo(props) {
           type="date"
           id="date"
           name="dob"
-          onChange={props.updateUserInfo}
+          onChange={props.collectInfo}
           value={props.userDetails.dob}
         />
         <div id="dobError" className="error">
-          {props.error.dob}
+          {props.errors.dob}
         </div>
       </div>
       <div className="countryOptions">
         <div>Country:</div>
         <select
           id="selectCountry"
-          onChange={props.updateUserInfo}
           name="country"
+          onChange={props.collectInfo}
           value={props.userDetails.country}
         >
-          {props.country.map((item, index) =>
+          {Country.map((item, index) =>
             index === 0 ? (
               <option value={item} key={index} disabled>
                 {item}
@@ -41,11 +43,10 @@ function UserInfo(props) {
           )}
         </select>
         <div id="countryError" className="error">
-          {props.error.country}
+          {props.errors.country}
         </div>
       </div>
     </div>
   );
 }
-
 export default UserInfo;

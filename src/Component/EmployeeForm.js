@@ -1,45 +1,57 @@
 import React, { Component, Fragment } from "react";
-import { Country } from "../Constants/Constant";
-import { OrgName } from "../Constants/Constant";
-import { State } from "../Constants/Constant";
-import UserDetails from "../Component/SubComponents/UserDetails";
-import AddressSection from "../Component/SubComponents/AddressSection";
-import ConfirmationSection from "../Component/SubComponents/ConfirmationSection";
+import UserDetails from "./UserDetails";
+import AddressSection from "./AddressSection";
+import ConfirmationSection from "./ConfirmationSection";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { action1 } from "../store/action/action";
 
 class EmployeeForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    console.log(props.state);
-  }
+  collectInfo = (event) => {
+    let { data, actions } = this.props;
+    let { userDetails } = data;
+    let name = event.target.name;
+    let value = event.target.value;
+    userDetails[name] = value;
+    actions.action1("userDetails", { ...userDetails, [name]: value });
+  };
+
   render() {
+    let { data } = this.props;
+    let { userDetails, errors } = data;
     return (
       <Fragment>
         <UserDetails
-          userDetails={this.props.userDetails}
-          Country={Country}
-          OrgName={OrgName}
-          updateUserInfo={this.props.updateUserInfo}
-          stateField={State}
-          error={this.props.errors}
+          userDetails={userDetails}
+          errors={errors}
+          collectInfo={this.collectInfo}
         />
         <AddressSection
-          userDetails={this.props.userDetails}
-          updateUserInfo={this.props.updateUserInfo}
-          error={this.props.errors}
+          userDetails={userDetails}
+          errors={errors}
+          collectInfo={this.collectInfo}
+          data={data}
         />
         <ConfirmationSection
-          updateUserInfo={this.props.updateUserInfo}
-          submit={this.props.submitHandler}
-          userDetails={this.props.userDetails}
-          error={this.props.errors}
-          state={this.props.state}
-          toggleChange={this.props.toggleChange}
-          cancel={this.props.cancel}
+          userDetails={userDetails}
+          errors={errors}
+          collectInfo={this.collectInfo}
+          data={data}
         />
       </Fragment>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    data: state.reducer,
+  };
+};
 
-export default EmployeeForm;
+const mapDispachToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators({ action1 }, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispachToProps)(EmployeeForm);

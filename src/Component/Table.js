@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { UserInfo } from "../Constants/Constant";
+// import { UserInfo } from "../Constants/Constant";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { action1, collectInfo } from "../store/action/action";
 
 const TableHeader = () => {
   return (
@@ -19,6 +22,7 @@ const TableHeader = () => {
 };
 
 const TableBody = (props) => {
+  console.log("PROPSDATA", props);
   const rows = props.userData.map((row, index) => {
     console.log("row", row);
     return (
@@ -39,7 +43,7 @@ const TableBody = (props) => {
             onClick={() => props.editData(index)}
             style={
               props.state.isEdit
-                ? { pointerEvents: "none", cursor: "default",color:"black" }
+                ? { pointerEvents: "none", cursor: "default", color: "black" }
                 : { pointerEvents: "all", cursor: "cursor" }
             }
           >
@@ -50,7 +54,7 @@ const TableBody = (props) => {
             onClick={() => props.removeData(index)}
             style={
               props.state.isEdit
-                ? { pointerEvents: "none", cursor: "default",color:"black" }
+                ? { pointerEvents: "none", cursor: "default", color: "black" }
                 : { pointerEvents: "all", cursor: "cursor" }
             }
           >
@@ -86,22 +90,50 @@ const TableFormation = (props) => {
 class Table extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {};
   }
+  editData = (index) => {
+    const { data, actions } = this.props;
+    let { userDetails, userHistory, isEdit } = data;
+    userDetails = userHistory[index];
+    actions.action1("userDetails", { ...userDetails });
+    isEdit = true;
+    actions.action1("index", index);
+    actions.action1("isEdit", isEdit);
+  };
+  removeData = (index) => {
+    const { data, actions } = this.props;
+    let { userHistory } = data;
+    userHistory.splice(index, 1);
+    actions.action1("userHistory", userHistory);
+  };
   render() {
-    console.log("infoArray", UserInfo);
+    const { data } = this.props;
+    const { userHistory } = data;
     return (
       <div id="salesOrderTable">
         <h1>Employee Details</h1>
         <TableFormation
-          userData={this.props.userData}
-          removeData={this.props.removeData}
-          editData={this.props.editData}
-          state={this.props.state}
+          userData={userHistory}
+          removeData={this.removeData}
+          editData={this.editData}
+          state={data}
         />
       </div>
     );
   }
 }
+const mapStateToProps = (state) => {
+  console.log("state", state);
+  return {
+    data: state.reducer,
+  };
+};
 
-export default Table;
+const mapDispachToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators({ action1, collectInfo }, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispachToProps)(Table);
