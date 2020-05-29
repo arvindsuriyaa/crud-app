@@ -6,19 +6,21 @@ import { action1, collectInfo } from "../store/action/action";
 class ConfirmationSection extends Component {
   toggleChange = (event) => {
     const { data, actions } = this.props;
-    let { userDetails } = data;
+    let { userDetails, cachedAddress } = data;
     const isChecked = !event.target.checked;
     actions.action1("isChecked", !isChecked);
     if (!isChecked) {
       const address = { ...userDetails };
-      data["cachedAddress"] = address["permanentAddress"];
+      let addressCopy = { ...cachedAddress };
+      addressCopy = address["permanentAddress"];
       address["permanentAddress"] = address["communicationAddress"];
       console.log("hey here it is", data);
-      actions.action1("userDetails", { ...address });
+      actions.action1("cachedAddress", addressCopy);
+      actions.action1("userDetails", address);
     } else {
       const address = { ...userDetails };
       address["permanentAddress"] = data["cachedAddress"];
-      actions.action1("userDetails", { ...address });
+      actions.action1("userDetails", address);
     }
   };
   submitHandler = (event) => {
@@ -26,11 +28,8 @@ class ConfirmationSection extends Component {
     let { userDetails, errors, userHistory, isChecked } = data;
     let formValid = true;
     let flag = [];
-
     const userObj = { ...userDetails };
-    // console.log("USEROBJECT",userObj)
     Object.keys(userObj).map(function (keys) {
-      // debugger;
       if (
         userObj[keys].length === 0 ||
         userObj[keys] === "Select Country" ||
@@ -45,7 +44,6 @@ class ConfirmationSection extends Component {
         flag.push(formValid);
         return (errors[keys] = "");
       }
-      // return errors;
     });
     actions.action1("errors", { ...errors });
     let registerCheck = true;
@@ -55,7 +53,6 @@ class ConfirmationSection extends Component {
         break;
       }
     }
-    debugger;
     if (registerCheck) {
       if (data.isEdit) {
         userHistory.splice(data["index"], 1, { ...userObj });
@@ -83,7 +80,6 @@ class ConfirmationSection extends Component {
     }
   };
   cancel = () => {
-    debugger;
     const { data, actions } = this.props;
     const { userDetails } = data;
     let userObj = { ...userDetails };
