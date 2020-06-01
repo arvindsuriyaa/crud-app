@@ -1,6 +1,8 @@
 import React from "react";
-
+import SelectBox from "../common/SelectBox";
+import InputTypes from "../common/InputTypes";
 import { Country } from "../Constants/Constant";
+import "../styles/UserInfo.css";
 
 function UserInfo(props) {
   return (
@@ -11,7 +13,7 @@ function UserInfo(props) {
       </div>
       <div className="dob">
         <div>Date of Birth:</div>
-        <input
+        <InputTypes
           type="date"
           id="date"
           name="dob"
@@ -19,31 +21,20 @@ function UserInfo(props) {
           value={props.userDetails.dob}
         />
         <div id="dobError" className="error">
-          {props.errors.dob}
+          {props.userDetails.dob ? null : props.errors.dob}
         </div>
       </div>
       <div className="countryOptions">
         <div>Country:</div>
-        <select
+        <SelectBox
           id="selectCountry"
           name="country"
           onChange={props.collectInfo}
           value={props.userDetails.country}
-        >
-          {Country.map((item, index) =>
-            index === 0 ? (
-              <option value={item} key={index} disabled>
-                {item}
-              </option>
-            ) : (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            )
-          )}
-        </select>
+          elements={Country}
+        />
         <div id="countryError" className="error">
-          {props.errors.country}
+          {props.userDetails.country ? null : props.errors.country}
         </div>
       </div>
     </div>

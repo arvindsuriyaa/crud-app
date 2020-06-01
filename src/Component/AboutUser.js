@@ -1,37 +1,29 @@
 import React from "react";
+import "../styles/AboutUser.css";
 import { OrgName } from "../Constants/Constant";
 import { State } from "../Constants/Constant";
+import SelectBox from "../common/SelectBox";
+import InputTypes from "../common/InputTypes";
 
 function AboutUser(props) {
   return (
     <div className="formSection2">
       <div className="organisation">
         <div>Organisation Name:</div>
-        <select
+        <SelectBox
           id="selectOrganisation"
           onChange={props.collectInfo}
           name="orgName"
           value={props.userDetails.orgName}
-        >
-          {OrgName.map((item, index) =>
-            index === 0 ? (
-              <option key={index} value={item} disabled>
-                {item}
-              </option>
-            ) : (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            )
-          )}
-        </select>
+          elements={OrgName}
+        />
         <div id="firstNameError" className="error">
-          {props.errors.orgName}
+          {props.userDetails.orgName ? null : props.errors.orgName}
         </div>
       </div>
       <div className="firstName">
         <div>First Name:</div>
-        <input
+        <InputTypes
           type="text"
           id="firstNameField"
           name="firstName"
@@ -39,12 +31,12 @@ function AboutUser(props) {
           value={props.userDetails.firstName}
         />
         <div id="firstNameError" className="error">
-          {props.errors.firstName}
+          {props.userDetails.firstName ? null : props.errors.firstName}
         </div>
       </div>
       <div className="mobileNumber">
         <div>Mobile Number:</div>
-        <input
+        <InputTypes
           type="number"
           id="mobileField"
           name="mobileNumber"
@@ -52,31 +44,20 @@ function AboutUser(props) {
           value={props.userDetails.mobileNumber}
         />
         <div id="mobileError" className="error">
-          {props.errors.mobileNumber}
+          {props.userDetails.mobileNumber ? null : props.errors.mobileNumber}
         </div>
       </div>
       <div className="state">
         <div>State:</div>
-        <select
+        <SelectBox
           id="selectState"
           name="state"
           onChange={props.collectInfo}
           value={props.userDetails.state}
-        >
-          {State.map((item, index) =>
-            index === 0 ? (
-              <option key={index} value={item} disabled>
-                {item}
-              </option>
-            ) : (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            )
-          )}
-        </select>
+          elements={State}
+        />
         <div id="stateError" className="error">
-          {props.errors.state}
+          {props.userDetails.state ? null : props.errors.state}
         </div>
       </div>
     </div>

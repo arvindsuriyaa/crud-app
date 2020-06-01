@@ -2,6 +2,8 @@ import React from "react";
 import UserInfo from "../Component/UserInfo";
 import AboutUser from "../Component/AboutUser";
 import ContactUser from "../Component/ContactUser";
+import "../common/commonStyle.css";
+
 function UserDetails(props) {
   return (
     <div id="userDetails">

@@ -1,11 +1,13 @@
 import React from "react";
+import InputTypes from "../common/InputTypes";
+import "../styles/ContactUser.css";
 
 function ContactUser(props) {
   return (
     <div className="formSection3">
       <div className="lastName">
         <div>Last Name:</div>
-        <input
+        <InputTypes
           type="text"
           id="lastNameField"
           name="lastName"
@@ -13,7 +15,7 @@ function ContactUser(props) {
           value={props.userDetails.lastName}
         />
         <div id="lastNameError" className="error">
-          {props.errors.lastName}
+          {props.userDetails.lastName ? null : props.errors.lastName}
         </div>
       </div>
       <div className="gender">
@@ -39,12 +41,12 @@ function ContactUser(props) {
           />
         </form>
         <div id="genderError" className="error">
-          {props.errors.gender}
+          {props.userDetails.gender ? null : props.errors.gender}
         </div>
       </div>
       <div className="emailID">
         <div>Email ID:</div>
-        <input
+        <InputTypes
           id="emailIdField"
           type="text"
           name="emailId"
@@ -52,12 +54,12 @@ function ContactUser(props) {
           value={props.userDetails.emailId}
         />
         <div id="emailError" className="error">
-          {props.errors.emailId}
+          {props.userDetails.emailId ? null : props.errors.emailId}
         </div>
       </div>
       <div className="city">
         <div>City:</div>
-        <input
+        <InputTypes
           type="text"
           id="cityInput"
           name="city"
@@ -65,7 +67,7 @@ function ContactUser(props) {
           value={props.userDetails.city}
         />
         <div id="cityError" className="error">
-          {props.errors.city}
+          {props.userDetails.city ? null : props.errors.city}
         </div>
       </div>
     </div>

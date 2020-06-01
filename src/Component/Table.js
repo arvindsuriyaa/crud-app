@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { action1, collectInfo } from "../store/action/action";
+import { assignData, collectInfo } from "../store/action/action";
+import "../styles/Table.css"
 
 const TableHeader = () => {
   return (
@@ -96,16 +97,16 @@ class Table extends Component {
     const { data, actions } = this.props;
     let { userDetails, userHistory, isEdit } = data;
     userDetails = userHistory[index];
-    actions.action1("userDetails", { ...userDetails });
+    actions.assignData("userDetails", { ...userDetails });
     isEdit = true;
-    actions.action1("index", index);
-    actions.action1("isEdit", isEdit);
+    actions.assignData("index", index);
+    actions.assignData("isEdit", isEdit);
   };
   removeData = (index) => {
     const { data, actions } = this.props;
     let { userHistory } = data;
     userHistory.splice(index, 1);
-    actions.action1("userHistory", userHistory);
+    actions.assignData("userHistory", userHistory);
   };
   render() {
     const { data } = this.props;
@@ -132,7 +133,7 @@ const mapStateToProps = (state) => {
 
 const mapDispachToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ action1, collectInfo }, dispatch),
+    actions: bindActionCreators({ assignData, collectInfo }, dispatch),
   };
 };
 

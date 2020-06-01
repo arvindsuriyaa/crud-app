@@ -4,7 +4,7 @@ import AddressSection from "./AddressSection";
 import ConfirmationSection from "./ConfirmationSection";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { action1 } from "../store/action/action";
+import { assignData } from "../store/action/action";
 
 class EmployeeForm extends Component {
   collectInfo = (event) => {
@@ -13,7 +13,7 @@ class EmployeeForm extends Component {
     let name = event.target.name;
     let value = event.target.value;
     userDetails[name] = value;
-    actions.action1("userDetails", { ...userDetails, [name]: value });
+    actions.assignData("userDetails", { ...userDetails, [name]: value });
   };
 
   render() {
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispachToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ action1 }, dispatch),
+    actions: bindActionCreators({ assignData }, dispatch),
   };
 };
 

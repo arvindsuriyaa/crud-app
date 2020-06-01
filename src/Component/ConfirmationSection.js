@@ -1,41 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { action1, collectInfo } from "../store/action/action";
+import { assignData, collectInfo } from "../store/action/action";
+import InputTypes from "../common/InputTypes";
+import "../styles/ConfirmationSection.css";
 
 class ConfirmationSection extends Component {
-  toggleChange = (event) => {
-    const { data, actions } = this.props;
-    let { userDetails, cachedAddress } = data;
-    const isChecked = !event.target.checked;
-    actions.action1("isChecked", !isChecked);
-    if (!isChecked) {
-      const address = { ...userDetails };
-      let addressCopy = { ...cachedAddress };
-      addressCopy = address["permanentAddress"];
-      address["permanentAddress"] = address["communicationAddress"];
-      console.log("hey here it is", data);
-      actions.action1("cachedAddress", addressCopy);
-      actions.action1("userDetails", address);
-    } else {
-      const address = { ...userDetails };
-      address["permanentAddress"] = data["cachedAddress"];
-      actions.action1("userDetails", address);
-    }
-  };
   submitHandler = (event) => {
     let { data, actions } = this.props;
-    let { userDetails, errors, userHistory, isChecked } = data;
+    let { userDetails, errors, userHistory } = data;
     let formValid = true;
     let flag = [];
     const userObj = { ...userDetails };
     Object.keys(userObj).map(function (keys) {
-      if (
-        userObj[keys].length === 0 ||
-        userObj[keys] === "Select Country" ||
-        userObj[keys] === "Select Organisation" ||
-        userObj[keys] === "Select State"
-      ) {
+      if (userObj[keys].length === 0) {
         formValid = false;
         flag.push(formValid);
         return (errors[keys] = "*This Field is required");
@@ -45,7 +23,7 @@ class ConfirmationSection extends Component {
         return (errors[keys] = "");
       }
     });
-    actions.action1("errors", { ...errors });
+    actions.assignData("errors", { ...errors });
     let registerCheck = true;
     for (let iterate = 0; iterate < flag.length; iterate++) {
       if (!flag[iterate]) {
@@ -57,65 +35,37 @@ class ConfirmationSection extends Component {
       if (data.isEdit) {
         userHistory.splice(data["index"], 1, { ...userObj });
         const isEdit = false;
-        actions.action1("isEdit", isEdit);
+        actions.assignData("isEdit", isEdit);
       } else {
         userHistory.push({ ...userObj });
       }
-      actions.action1("userHistory", [...userHistory]);
-      Object.keys(userObj).map(function (keys) {
-        if (keys === "country") {
-          userObj[keys] = "Select Country";
-        } else if (keys === "orgName") {
-          userObj[keys] = "Select Organisation";
-        } else if (keys === "state") {
-          userObj[keys] = "Select State";
-        } else {
-          userObj[keys] = "";
-        }
-        return userObj;
-      });
-      actions.action1("userDetails", { ...userObj });
-      isChecked = false;
-      actions.action1("isChecked", isChecked);
+      actions.assignData("userHistory", [...userHistory]);
+      this.cancel();
     }
   };
   cancel = () => {
     const { data, actions } = this.props;
-    const { userDetails } = data;
+    const { userDetails, errors } = data;
+    let error = { ...errors };
     let userObj = { ...userDetails };
     Object.keys(userObj).map(function (keys) {
-      if (keys === "country") {
-        userObj[keys] = "Select Country";
-      } else if (keys === "orgName") {
-        userObj[keys] = "Select Organisation";
-      } else if (keys === "state") {
-        userObj[keys] = "Select State";
-      } else {
-        userObj[keys] = "";
-      }
+      userObj[keys] = "";
       return userObj;
     });
     let isChecked = false;
     let isEdit = false;
-    actions.action1("userDetails", { ...userObj });
-    actions.action1("isChecked", isChecked);
-    actions.action1("isEdit", isEdit);
+    error = {};
+    actions.assignData("errors", error);
+    actions.assignData("userDetails", { ...userObj });
+    actions.assignData("isChecked", isChecked);
+    actions.assignData("isEdit", isEdit);
   };
   render() {
     return (
       <div id="confirmSection">
-        <div className="checkBox">
-          <input
-            type="checkbox"
-            id="copy"
-            checked={this.props.data.isChecked}
-            onChange={(event) => this.toggleChange(event)}
-          />
-          <div>Permanent Address same as communication address</div>
-        </div>
         <div id="pincode">
           <div>Pincode</div>
-          <input
+          <InputTypes
             type="number"
             id="pincodeField"
             name="pincode"
@@ -123,7 +73,7 @@ class ConfirmationSection extends Component {
             value={this.props.userDetails.pincode}
           />
           <div id="pincodeError" className="error">
-            {this.props.errors.pincode}
+            {this.props.userDetails.pincode ? null : this.props.errors.pincode}
           </div>
         </div>
         <div id="submitSection">
@@ -166,7 +116,7 @@ const mapStateToProps = (state) => {
 
 const mapDispachToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ action1, collectInfo }, dispatch),
+    actions: bindActionCreators({ assignData, collectInfo }, dispatch),
   };
 };
 
