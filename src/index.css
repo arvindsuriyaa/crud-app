@@ -158,18 +158,28 @@ input[type="number"] {
 }
 
 /* AddressSection */
-
+#addressSection{
+  padding: 0px 35px;
+  height: 165px;
+}
 #address {
   display: flex;
   flex-direction: row;
-  padding: 0px 35px;
 }
 .addressOfStay,
 .presentAddress {
   margin: 0 15px;
+  width: 50%;
 }
+
 textarea {
+  height: 100px;
+  width: 99%;
   resize: none;
+}
+.checkBox {
+  margin: 0px 10px;
+  display: flex;
 }
 
 /* confirmation section */
@@ -178,10 +188,6 @@ textarea {
   padding: 0 48px;
 }
 
-.checkBox {
-  margin: 10px 0px;
-  display: flex;
-}
 #pincode {
   margin-top: 8px;
 }
