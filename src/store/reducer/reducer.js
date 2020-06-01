@@ -1,11 +1,13 @@
+import EMPLOYEE_DETAILS from "../Types/types"
+
 const initialState = {
   userDetails: {
     dob: "",
-    country: "Select Country",
-    orgName: "Select Organisation",
+    country: "",
+    orgName: "",
     firstName: "",
     mobileNumber: "",
-    state: "Select State",
+    state: "",
     lastName: "",
     gender: "",
     emailId: "",
@@ -16,6 +18,7 @@ const initialState = {
   },
   cachedAddress: "",
   errors: {},
+
   isChecked: false,
   index: null,
   isEdit: false,
@@ -24,7 +27,7 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "HANDLE_DATA":
+    case EMPLOYEE_DETAILS:
       return { ...state, [action.payload.name]: action.payload.value };
     default:
       return state;
