@@ -1,0 +1,21 @@
+#salesOrderTable {
+  text-align: center;
+}
+table {
+  width: 94%;
+  margin: 50px 50px;
+}
+table th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 8px 0px;
+  color: black;
+  background-color: #00c61b;
+}
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 8px 0px;
+  color: black;
+  background-color: #eeeeee;
+}
