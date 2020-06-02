@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/AboutUser.css";
+import "../styles/AboutUser.scss";
 import { OrgName } from "../Constants/Constant";
 import { State } from "../Constants/Constant";
 import SelectBox from "../common/SelectBox";

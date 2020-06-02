@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import "../common/commonStyle.css";
+import "../common/commonStyle.scss";
 
 class Layout extends Component{
   render() {

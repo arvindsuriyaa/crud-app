@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { assignData, collectInfo } from "../store/action/action";
 import InputTypes from "../common/InputTypes";
-import "../styles/ConfirmationSection.css";
+import "../styles/ConfirmationSection.scss";
 
 class ConfirmationSection extends Component {
   submitHandler = (event) => {

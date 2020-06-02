@@ -2,7 +2,7 @@ import React from "react";
 import SelectBox from "../common/SelectBox";
 import InputTypes from "../common/InputTypes";
 import { Country } from "../Constants/Constant";
-import "../styles/UserInfo.css";
+import "../styles/UserInfo.scss";
 
 function UserInfo(props) {
   return (

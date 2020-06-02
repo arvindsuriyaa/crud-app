@@ -1,6 +1,6 @@
 import React from "react";
 import InputTypes from "../common/InputTypes";
-import "../styles/ContactUser.css";
+import "../styles/ContactUser.scss";
 
 function ContactUser(props) {
   return (

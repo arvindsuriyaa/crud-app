@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { assignData, collectInfo } from "../store/action/action";
-import "../styles/Table.css"
+import "../styles/Table.scss"
 
 const TableHeader = () => {
   return (

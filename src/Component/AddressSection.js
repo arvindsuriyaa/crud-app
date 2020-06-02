@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import "../styles/AddressSection.css";
+import "../styles/AddressSection.scss";
 import { assignData, collectInfo } from "../store/action/action";
 
 class AddressSection extends Component {
